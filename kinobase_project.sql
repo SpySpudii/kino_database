@@ -421,3 +421,11 @@ for row, value in enumerate(all_rows):
 3 Record(film_name='Ice Age')
 
 
+    SELECT film_name FROM pictures
+           LEFT JOIN age_limit ON age_limit.film_id = pictures.film_id
+           WHERE (film_age_limit >= 16);
+
+    SELECT film_name FROM pictures
+           LEFT JOIN age_limit ON age_limit.film_id = pictures.film_id
+           WHERE (film_age_limit = 16 OR film_age_limit = 17 OR  film_age_limit = 18);
+
