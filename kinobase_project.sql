@@ -218,7 +218,7 @@ query = """ INSERT INTO pictures (film_id, film_name)
                  (9, 'Chernobyl'),
                  (10, 'Ratatouille'),
                  (11, 'Ice Age'),
-                 (11, 'Hasksaw Ridge')
+                 (12, 'Hasksaw Ridge')
                  
         """
 execute_query(query)
