@@ -431,5 +431,5 @@ for row, value in enumerate(all_rows):
 
     SELECT film_name FROM pictures
            LEFT JOIN age_limit ON age_limit.film_id = pictures.film_id
-           WHERE (film_age_limit >= 16 AND film_age_limit < 18);
+           WHERE (film_age_limit >= 16 AND film_age_limit <= 18);
 
