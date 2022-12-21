@@ -420,16 +420,51 @@ for row, value in enumerate(all_rows):
 2 Record(film_name='Ratatouille')
 3 Record(film_name='Ice Age')
 
+____________________________
+
+#Дополнительные запросы
+
+#Вывести фильмы c ограничением возраста от 16 до 18
 
     SELECT film_name FROM pictures
-           LEFT JOIN age_limit ON age_limit.film_id = pictures.film_id
-           WHERE (film_age_limit >= 16);
+    LEFT JOIN age_limit ON age_limit.film_id = pictures.film_id
+    WHERE (film_age_limit >= 16 AND film_age_limit <= 18);
 
+(film_name='Fight Club')
+(film_name='The Gentlemen')
+(film_name='Intouchables')
+(film_name='Breaking Bad')
+(film_name='Friends')
+(film_name='Game of Thrones')
+(film_name='Chernobyl')
+(film_name='Hasksaw Ridge')
+
+#Вывести фильмы выпущенные за последние 4 года
+                
     SELECT film_name FROM pictures
-           LEFT JOIN age_limit ON age_limit.film_id = pictures.film_id
-           WHERE (film_age_limit = 16 OR film_age_limit = 17 OR  film_age_limit = 18);
-
+    LEFT JOIN production ON production.film_id = pictures.film_id
+    WHERE film_year >= 2019;
+                
+(film_name='The Gentlemen')
+(film_name='Chernobyl')
+                
+#Вывести фильмы выпущенные с 2005 по 2015 года
+                
     SELECT film_name FROM pictures
-           LEFT JOIN age_limit ON age_limit.film_id = pictures.film_id
-           WHERE (film_age_limit >= 16 AND film_age_limit <= 18);
-
+    LEFT JOIN production ON production.film_id = pictures.film_id
+    WHERE (film_year >= 2005 AND film_year <= 2015);
+                
+(film_name='Intouchables')
+(film_name='Game of Thrones')
+(film_name='Ratatouille')
+                
+#Вывести года в которые вышло 2 и более фильма, и какие это фильмы
+                
+    SELECT string_agg(film_name, ','), production.film_year FROM pictures
+    LEFT JOIN production ON production.film_id = pictures.film_id
+    GROUP BY film_year HAVING count(film_year) > 1
+                
+(string_agg='Intouchables,Game of Thrones'), (film_year='2011')
+(string_agg='Zootopia,Hasksaw Ridge'), (film_year='2016')
+(string_agg='The Gentlemen,Chernobyl'), (film_year='2019')
+                
